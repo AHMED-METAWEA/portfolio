@@ -17,7 +17,7 @@ Change the text there, commit, and push — Vercel redeploys automatically.
 | What | Where |
 | --- | --- |
 | Profile photo | `public/ahmed.jpg` (square, at least 800×800). A monogram shows until it exists. |
-| Resume / CV | `public/Ahmed_Metawea_CV.pdf` |
+| Resume / CV | `public/Ahmed_Metawea_CV_2026.pdf` |
 | Social preview image | `public/og-image.png` (1200×630) |
 | Favicon | `public/favicon.svg` |
 
