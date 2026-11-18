@@ -11,14 +11,16 @@ export const profile = {
   initials: 'AM',
   title: 'AI & Data Science Engineer',
   roles: [
+    'AI Engineer',
     'AI & Data Science Engineer',
     'Machine Learning Engineer',
     'Computer Vision Engineer',
     'NLP & LLM Engineer',
     'Multi-Agent Systems Builder',
+    'Digital Twin & Decision-Support Builder',
   ],
   tagline:
-    'I build end-to-end AI systems — from fine-tuned vision and language models to multi-agent LLM platforms — and ship them as products people can actually use.',
+    'I build end-to-end AI systems — from fine-tuned vision and language models to multi-agent LLM platforms and utility digital twins — and ship them as products people can actually use.',
   location: 'Cairo, Egypt',
   email: 'ahmed.metawea001@gmail.com',
   linkedin: 'https://www.linkedin.com/in/ahmed-metawea-575569247',
@@ -38,13 +40,14 @@ export const heroChips = [
 export const about = {
   heading: ['Turning models into', 'products that work'],
   paragraphs: [
-    "I'm Ahmed, an AI & Data Science engineer based in Cairo with a Bachelor's degree in Artificial Intelligence from Kafr Elsheikh University. What drives me is taking a model out of the notebook and all the way to something real — a web app, an API, or an automated pipeline that solves an actual problem.",
-    'My work spans computer vision (Vision Transformers for skin-lesion diagnosis, real-time monitoring with YOLOv11 and FaceNet), NLP (translating Arabic dialects into Modern Standard Arabic with fine-tuned transformers), and LLM-powered multi-agent systems built with LangGraph.',
+    "I'm Ahmed, an AI engineer based in Cairo with a Bachelor's degree in Artificial Intelligence from Kafr Elsheikh University and an AWS Machine Learning Engineer certification. What drives me is taking a model out of the notebook and all the way to something real — a web app, an API, or an automated pipeline that solves an actual problem.",
+    'Most recently I was an AI & Data intern at ACUD (Administrative Capital for Urban Development), where I built Care Grid — a simulation-based digital twin of water, electricity and district-cooling networks with fault monitoring, demand forecasting and multi-agent maintenance decisions.',
+    'My work also spans computer vision (Vision Transformers for skin-lesion diagnosis, real-time monitoring with YOLOv11 and FaceNet), NLP (translating Arabic dialects into Modern Standard Arabic with fine-tuned transformers), and LLM-powered multi-agent systems built with LangGraph.',
     'I care about systems that are reliable, not just impressive: deterministic computation where numbers matter, tests and Docker for reproducibility, and LLMs used where they add real value.',
   ],
   languages: [
     { name: 'Arabic', level: 'Native' },
-    { name: 'English', level: 'Advanced' },
+    { name: 'English', level: 'Professional working' },
   ],
 }
 
@@ -64,24 +67,24 @@ export const focusAreas: { icon: FocusIcon; title: string; text: string }[] = [
   {
     icon: 'agents',
     title: 'LLMs & Multi-Agent Systems',
-    text: 'LangGraph agents, RAG and multi-provider LLM layers that turn raw data into decisions.',
+    text: 'LangGraph agents, RAG and decision-support systems that turn raw data and sensor streams into decisions.',
   },
   {
     icon: 'deploy',
     title: 'Applied ML & Deployment',
-    text: 'Data preprocessing and modeling through Flask / FastAPI services, Docker and AWS.',
+    text: 'From data preprocessing and modeling to FastAPI / WebSocket services, Docker and AWS.',
   },
 ]
 
 export const stats = [
-  { value: 6, suffix: '+', decimals: 0, label: 'End-to-end AI projects' },
+  { value: 7, suffix: '+', decimals: 0, label: 'End-to-end AI projects' },
   { value: 96.95, suffix: '%', decimals: 2, label: 'ViT validation accuracy' },
   { value: 71.56, suffix: '', decimals: 2, label: 'BLEU · Arabic dialect → MSA' },
   { value: 2, suffix: '', decimals: 0, label: 'Industry AI certifications' },
 ]
 
-export type ProjectCategory = 'Agents & LLMs' | 'Computer Vision' | 'NLP' | 'Healthcare AI'
-export type ProjectIcon = 'agents' | 'skin' | 'vision' | 'translate' | 'lab' | 'text'
+export type ProjectCategory = 'Agents & LLMs' | 'Digital Twins' | 'Computer Vision' | 'NLP' | 'Healthcare AI'
+export type ProjectIcon = 'agents' | 'grid' | 'skin' | 'vision' | 'translate' | 'lab' | 'text'
 
 export interface Project {
   title: string
@@ -96,6 +99,8 @@ export interface Project {
   metrics: { value: string; label: string }[]
   stack: string[]
   role?: string
+  /** Featured cards only: the step list shown in the side panel ("Name · detail"). */
+  pipeline?: { label: string; steps: string[]; note: { tag: string; text: string } }
   repo: string
 }
 
@@ -110,19 +115,67 @@ export const projects: Project[] = [
     problem:
       'Small and e-commerce businesses sit on valuable sales data but rarely have the analysts or tooling to clean it, forecast demand or spot customers who are about to churn.',
     solution:
-      'A full-stack, multi-agent BI platform where owners ingest data from files, Google Sheets or a linked database and get automated cleaning, analytics, forecasting, marketing insights and churn prediction.',
+      'A full-stack, multi-agent BI platform where SME and e-commerce owners ingest data from files or a linked database and get automated cleaning, analytics, forecasting, marketing insights and churn prediction.',
     highlights: [
       '10 specialized agents: human-in-the-loop data cleaning, RFM segmentation, back-tested forecasting, churn prediction, root-cause analysis and scheduled autonomous monitoring with alerts.',
-      'Deterministic-first architecture — every KPI, forecast and score is computed with pandas / scikit-learn / Prophet.',
+      'Deterministic-first architecture — every KPI, forecast and score is computed with pandas / scikit-learn / Prophet; LLM agents add context but never generate financial metrics.',
       'Multi-provider LLM layer (Groq → Anthropic → OpenAI → OpenRouter) used only to narrate results — eliminating hallucinated figures.',
     ],
     metrics: [
       { value: '10', label: 'Specialized agents' },
-      { value: '≈0.93', label: 'Churn model AUC' },
+      { value: '0.93', label: 'Churn model AUC' },
       { value: '4', label: 'LLM providers w/ failover' },
     ],
     stack: ['LangGraph', 'FastAPI', 'Next.js', 'PostgreSQL', 'pandas', 'scikit-learn', 'Prophet'],
+    pipeline: {
+      label: 'Agent pipeline',
+      steps: [
+        'Ingest · files / linked DB',
+        'Clean · human-in-the-loop',
+        'Analyze · KPIs & RFM',
+        'Forecast · back-tested',
+        'Predict · churn risk',
+        'Monitor · alerts & RCA',
+      ],
+      note: { tag: 'LLM layer', text: 'narrates the computed results — it never invents the numbers.' },
+    },
     repo: 'https://github.com/AHMED-METAWEA/DAAS-Data-Analysis-Automation-System-',
+  },
+  {
+    title: 'Care Grid',
+    subtitle: 'Utility Network Digital Twin & Decision Support',
+    icon: 'grid',
+    featured: true,
+    badge: 'ACUD Internship',
+    categories: ['Agents & LLMs', 'Digital Twins'],
+    problem:
+      'Water, electricity and district-cooling networks produce a constant stream of sensor readings, yet faults are often caught late and maintenance budgets get spent without a clear view of what each delay will cost.',
+    solution:
+      'A real-time, simulation-based digital twin of all three networks that streams live sensor data, scores fault risk, forecasts demand and uses specialist agents to prioritize maintenance — with a human approving every decision.',
+    highlights: [
+      '89 simulated sensors across 48 assets streamed over WebSockets into a live twin of the water, electricity and cooling networks.',
+      'ML demand forecasting, fault-risk scoring and Monte Carlo cost analysis — every financial figure and KPI is computed deterministically, never generated by an LLM.',
+      'Evaluated on 212 injected faults and held-out simulated demand; backed by 498 automated tests and tamper-evident decision logs.',
+    ],
+    metrics: [
+      { value: '93%', label: 'Fault-detection recall' },
+      { value: '1–3.4%', label: 'Forecast MAPE' },
+      { value: '498', label: 'Automated tests' },
+    ],
+    stack: ['FastAPI', 'WebSockets', 'React', 'deck.gl', 'WNTR', 'pandas', 'Monte Carlo', 'Multi-Agent LLMs'],
+    pipeline: {
+      label: 'Twin pipeline',
+      steps: [
+        'Stream · 89 sensors / 48 assets',
+        'Detect · fault-risk scoring',
+        'Forecast · utility demand',
+        'Cost · Monte Carlo analysis',
+        'Prioritize · multi-agent decisions',
+        'Approve · human sign-off & audit log',
+      ],
+      note: { tag: 'Decision layer', text: 'agents explain and rank actions — every cost and KPI is computed, never invented.' },
+    },
+    repo: 'https://github.com/AHMED-METAWEA/UtilityGuard-Twin',
   },
   {
     title: 'Safe Skin',
@@ -204,7 +257,7 @@ export const projects: Project[] = [
       { value: '2', label: 'Languages' },
       { value: '1', label: 'Docker image, API + GUI' },
     ],
-    stack: ['FastAPI', 'Pydantic', 'spaCy', 'NLTK', 'PyArabic', 'Docker'],
+    stack: ['FastAPI', 'Pydantic', 'spaCy', 'NLTK', 'PyArabic', 'Tashaphyne', 'Docker'],
     repo: 'https://github.com/AHMED-METAWEA/Text-Preprocessor',
   },
 ]
@@ -215,12 +268,12 @@ export const skillGroups: { icon: SkillIcon; title: string; items: string[] }[] 
   {
     icon: 'code',
     title: 'Languages & Backend',
-    items: ['Python', 'SQL', 'FastAPI', 'Flask', 'Streamlit', 'Pydantic', 'REST APIs'],
+    items: ['Python', 'SQL', 'FastAPI', 'Flask', 'Streamlit', 'Pydantic', 'REST APIs', 'WebSockets'],
   },
   {
     icon: 'ml',
     title: 'Machine Learning & Data',
-    items: ['scikit-learn', 'pandas', 'Ensemble Models', 'Forecasting (Prophet)', 'RFM & Churn Analytics', 'PostgreSQL'],
+    items: ['scikit-learn', 'pandas', 'Ensemble Models', 'Time-Series Forecasting (Prophet)', 'Monte Carlo Simulation', 'RFM & Churn Analytics', 'PostgreSQL'],
   },
   {
     icon: 'dl',
@@ -234,8 +287,8 @@ export const skillGroups: { icon: SkillIcon; title: string; items: string[] }[] 
   },
   {
     icon: 'agents',
-    title: 'Agents & AI Systems',
-    items: ['LangGraph', 'Multi-Agent Orchestration', 'Multi-Provider LLMs', 'Human-in-the-Loop', 'OCR Pipelines'],
+    title: 'Agentic AI & Automation',
+    items: ['LangGraph', 'Multi-Agent Orchestration', 'n8n', 'Decision Support', 'Digital Twins', 'Human-in-the-Loop', 'OCR Pipelines'],
   },
   {
     icon: 'cloud',
@@ -246,7 +299,7 @@ export const skillGroups: { icon: SkillIcon; title: string; items: string[] }[] 
 
 export const softSkills = ['Teamwork', 'Effective Communication', 'Problem Solving', 'Continuous Learning']
 
-export type TimelineKind = 'training' | 'education' | 'activity'
+export type TimelineKind = 'experience' | 'training' | 'education' | 'activity'
 
 export const timeline: {
   kind: TimelineKind
@@ -257,14 +310,25 @@ export const timeline: {
   points: string[]
 }[] = [
   {
-    kind: 'training',
-    title: 'AI & Data Science Track',
-    org: 'Digilians Initiative — Specialized Diploma (9 months)',
-    date: 'Dec 2025 – Aug 2026',
-    place: 'Military Academy, Egypt',
+    kind: 'experience',
+    title: 'AI & Data Intern',
+    org: 'ACUD — Administrative Capital for Urban Development',
+    date: 'Oct 2026 – Nov 2026',
     points: [
-      'Intensive, project-based program in the AI & Data Science track.',
-      'Built end-to-end machine learning, deep learning, NLP and computer-vision projects — from data preparation to deployed apps.',
+      'Built a simulation-based digital twin of water, electricity and district-cooling networks with AI fault monitoring and demand forecasting.',
+      'Developed explainable cost analysis and multi-agent decision support for maintenance prioritization.',
+      'Delivered as Care Grid — 93% fault-detection recall on 212 injected faults and 1–3.4% demand-forecast MAPE.',
+    ],
+  },
+  {
+    kind: 'training',
+    title: 'AI & Data Science Engineering Track',
+    org: 'Digilians Initiative by NTI — 9-month program',
+    date: 'Dec 2025 – Sep 2026',
+    place: 'Egyptian Military Academy',
+    points: [
+      'Intensive, project-based track covering data analysis, advanced ML, deep learning, NLP, computer vision, deployment, GenAI and agentic AI.',
+      'Graduation project: DAAS — a multi-agent BI automation platform for SME and e-commerce businesses.',
     ],
   },
   {
@@ -280,10 +344,20 @@ export const timeline: {
     ],
   },
   {
+    kind: 'training',
+    title: 'AI & Machine Learning with Quantum Computing Foundations',
+    org: 'Ministry of Youth & Sports — Shabab Mobtakeron Initiative',
+    date: 'Feb 2024',
+    points: [
+      'Completed a comprehensive program covering core artificial intelligence and machine learning concepts.',
+      'Explored the theoretical foundations of quantum computing and its impact on advanced computing.',
+    ],
+  },
+  {
     kind: 'activity',
     title: 'Contestant',
     org: 'Egyptian Collegiate Programming Contest (ECPC)',
-    date: '2023',
+    date: 'Jul 2024',
     place: 'Alexandria',
     points: ['Solved algorithmic and mathematical problems using data structures and algorithms under strict time limits.'],
   },
@@ -299,6 +373,7 @@ export const certifications: {
   {
     title: 'AWS Certified Machine Learning Engineer – Associate (MLA-C01)',
     issuer: 'Amazon Web Services',
+    date: 'Sep 2026',
     highlight: true,
     url: 'https://drive.google.com/file/d/1uX131rXBSAC2pIg_fCeChm0l-Q1-MMtz/view?usp=sharing',
   },

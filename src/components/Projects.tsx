@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowUpRight, Bot, FlaskConical, Languages, ScanEye, ScanSearch, TextCursorInput, UserRound } from 'lucide-react'
+import { ArrowUpRight, Bot, FlaskConical, Languages, Network, ScanEye, ScanSearch, TextCursorInput, UserRound } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { projects, type Project, type ProjectCategory, type ProjectIcon } from '../data/portfolio'
 import { GithubIcon } from './BrandIcons'
@@ -7,6 +7,7 @@ import { Reveal, Section, SectionHeading } from './ui'
 
 const icons: Record<ProjectIcon, React.ReactNode> = {
   agents: <Bot size={20} />,
+  grid: <Network size={20} />,
   skin: <ScanSearch size={20} />,
   vision: <ScanEye size={20} />,
   translate: <Languages size={20} />,
@@ -14,7 +15,7 @@ const icons: Record<ProjectIcon, React.ReactNode> = {
   text: <TextCursorInput size={20} />,
 }
 
-const filters: ('All' | ProjectCategory)[] = ['All', 'Agents & LLMs', 'Computer Vision', 'NLP', 'Healthcare AI']
+const filters: ('All' | ProjectCategory)[] = ['All', 'Agents & LLMs', 'Digital Twins', 'Computer Vision', 'NLP', 'Healthcare AI']
 
 function RepoLink({ href, title }: { href: string; title: string }) {
   return (
@@ -64,9 +65,8 @@ function CodeLink({ href }: { href: string }) {
   )
 }
 
-const pipeline = ['Ingest · files / Sheets / DB', 'Clean · human-in-the-loop', 'Analyze · KPIs & RFM', 'Forecast · back-tested', 'Predict · churn risk', 'Monitor · alerts & RCA']
-
 function FeaturedCard({ p }: { p: Project }) {
+  const pipeline = p.pipeline
   return (
     <article className="card card-hover group overflow-hidden">
       <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,rgba(45,212,191,0.16),transparent)]" />
@@ -118,11 +118,12 @@ function FeaturedCard({ p }: { p: Project }) {
               </div>
             ))}
           </div>
+          {pipeline && (
           <div className="relative flex-1 rounded-2xl border border-white/[0.07] bg-ink-900/60 p-5 sm:p-6">
-            <Label accent>Agent pipeline</Label>
+            <Label accent>{pipeline.label}</Label>
             <ol className="relative mt-5 space-y-3">
               <span className="absolute bottom-3 left-[0.6rem] top-3 w-px bg-gradient-to-b from-accent/60 via-accent/25 to-accent-2/50" aria-hidden="true" />
-              {pipeline.map((step, i) => {
+              {pipeline.steps.map((step, i) => {
                 const [name, detail] = step.split(' · ')
                 return (
                   <motion.li
@@ -145,10 +146,10 @@ function FeaturedCard({ p }: { p: Project }) {
               })}
             </ol>
             <div className="mt-5 rounded-xl border border-dashed border-accent/25 bg-accent/[0.05] px-4 py-3 text-xs leading-relaxed text-fg-muted">
-              <span className="font-mono text-accent-soft">LLM layer</span> narrates the computed results — it never
-              invents the numbers.
+              <span className="font-mono text-accent-soft">{pipeline.note.tag}</span> {pipeline.note.text}
             </div>
           </div>
+          )}
         </div>
       </div>
     </article>

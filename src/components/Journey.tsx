@@ -1,8 +1,9 @@
-import { Calendar, GraduationCap, MapPin, Rocket, Trophy } from 'lucide-react'
+import { BriefcaseBusiness, Calendar, GraduationCap, MapPin, Rocket, Trophy } from 'lucide-react'
 import { timeline, type TimelineKind } from '../data/portfolio'
 import { Reveal, Section, SectionHeading } from './ui'
 
 const kindMeta: Record<TimelineKind, { icon: React.ReactNode; label: string }> = {
+  experience: { icon: <BriefcaseBusiness size={18} />, label: 'Experience' },
   training: { icon: <Rocket size={18} />, label: 'Training' },
   education: { icon: <GraduationCap size={18} />, label: 'Education' },
   activity: { icon: <Trophy size={18} />, label: 'Competition' },
@@ -11,7 +12,7 @@ const kindMeta: Record<TimelineKind, { icon: React.ReactNode; label: string }> =
 export default function Journey() {
   return (
     <Section id="journey">
-      <SectionHeading eyebrow="Journey" title="Education &" highlight="training" />
+      <SectionHeading eyebrow="Journey" title="Experience &" highlight="education" />
 
       <ol className="relative mx-auto max-w-3xl">
         <span
